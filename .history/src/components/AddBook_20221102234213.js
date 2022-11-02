@@ -53,7 +53,7 @@ const AddBook = ({ id, setBookId }) => {
       //
       console.log(id);
       getBook(id);
-      console.log("state present", state);
+      console.log("state present");
       // console.log("the record is :", state.data());
       // setTitle(state.data().title);
       // setAuthor(state.data().author);

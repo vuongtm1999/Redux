@@ -45,8 +45,6 @@ export const getBook = (id: any) => {
   const getBook = async () => { 
     const data = await getDoc(bookDoc);
 
-    console.log(data.data());
-
     return data.data();
   };
 

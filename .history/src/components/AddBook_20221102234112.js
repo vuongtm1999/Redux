@@ -32,11 +32,11 @@ const AddBook = ({ id, setBookId }) => {
     try {
       if (id !== undefined && id !== "") {
         console.log("id", id);
-        updateBook(id, newBook);
+        await updateBook(id, newBook);
         setBookId("");
         setMessage({ error: false, msg: "Updated successfully!" });
       } else {
-        addBooks(newBook);
+        await addBooks(newBook);
         setMessage({ error: false, msg: "New Book added successfully!" });
       }
     } catch (err) {
@@ -53,7 +53,7 @@ const AddBook = ({ id, setBookId }) => {
       //
       console.log(id);
       getBook(id);
-      console.log("state present", state);
+      console.log("state present");
       // console.log("the record is :", state.data());
       // setTitle(state.data().title);
       // setAuthor(state.data().author);

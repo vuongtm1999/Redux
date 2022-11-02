@@ -1,3 +1,4 @@
+import { getBookTest } from './../action-creators/index';
 const initialState: any = {};
 
 interface Action {
@@ -16,16 +17,17 @@ const reducer = (state: any = initialState, action: Action): any => {
         case "getAllBooks":
             return action.payload;
         case "getBook":
-            console.log("Data", action.payload.data());
-
-            return {
-                ...state,
-                state: action.payload.data()
-            }
-
-        default: 
-            return state;
+            // state = { result: action.payload }
+            break;
+        // case String(getBookTest.fulfilled):
+        //     return {
+        //         ...state,
+        //         data: action.payload,
+        //     };
+        // return action.payload;
     }
+
+    return state;
 }
 
 export default reducer

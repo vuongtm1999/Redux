@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
+import BookDataService from "../services/book.services";
 import { actionCreators } from "../state";
 
 const AddBook = ({ id, setBookId }) => {
@@ -13,7 +14,7 @@ const AddBook = ({ id, setBookId }) => {
   const state = useSelector((state) => state.book);
   const dispatch = useDispatch();
 
-  const { addBooks, updateBook, deleteBook, getAllBooks, getBook} = bindActionCreators(actionCreators, dispatch)
+  const { addBooks, updateBook, deleteBook, getAllBooks, getBook, getBookTest} = bindActionCreators(actionCreators, dispatch)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,11 +33,11 @@ const AddBook = ({ id, setBookId }) => {
     try {
       if (id !== undefined && id !== "") {
         console.log("id", id);
-        updateBook(id, newBook);
+        await updateBook(id, newBook);
         setBookId("");
         setMessage({ error: false, msg: "Updated successfully!" });
       } else {
-        addBooks(newBook);
+        await addBooks(newBook);
         setMessage({ error: false, msg: "New Book added successfully!" });
       }
     } catch (err) {
@@ -52,12 +53,12 @@ const AddBook = ({ id, setBookId }) => {
     try {
       //
       console.log(id);
-      getBook(id);
+      getBookTest(id);
       console.log("state present", state);
-      // console.log("the record is :", state.data());
-      // setTitle(state.data().title);
-      // setAuthor(state.data().author);
-      // setStatus(state.data().status);
+      // console.log("the record is :", docSnap.data());
+      // setTitle(docSnap.data().title);
+      // setAuthor(docSnap.data().author);
+      // setStatus(docSnap.data().status);
     } catch (err) {
       console.log("Edit error");
       setMessage({ error: true, msg: err.message });

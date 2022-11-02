@@ -15,17 +15,16 @@ const reducer = (state: any = initialState, action: Action): any => {
             return action.payload;
         case "getAllBooks":
             return action.payload;
-        case "getBook":
-            console.log("Data", action.payload.data());
-
+        case "getBook_FULFILLED":
+            // state = action.payload;
+            // console.log("Test result", ;
+            // state = { result:  }
             return {
-                ...state,
-                state: action.payload.data()
-            }
-
-        default: 
-            return state;
+                state: action.payload
+            };
     }
+
+    return state;
 }
 
 export default reducer

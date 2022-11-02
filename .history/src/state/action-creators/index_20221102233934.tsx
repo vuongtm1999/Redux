@@ -39,15 +39,21 @@ export const updateBook = (id: any, updatedBook: any) => {
   };
 };
 
+export const getBookTest = createAsyncAction('GET_BOOK', async (id) => {
+  const bookDoc = doc(db, "books", id);
+
+  const data = await getDoc(bookDoc);
+  
+  return data;
+});
+
 export const getBook = (id: any) => {
   const bookDoc = doc(db, "books", id);
   
   const getBook = async () => { 
     const data = await getDoc(bookDoc);
 
-    console.log(data.data());
-
-    return data.data();
+    return data;
   };
 
   return (dispatch: Dispatch<Action>) => {

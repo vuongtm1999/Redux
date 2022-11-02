@@ -22,10 +22,9 @@ const reducer = (state: any = initialState, action: Action): any => {
                 ...state,
                 state: action.payload.data()
             }
-
-        default: 
-            return state;
     }
+
+    return state;
 }
 
 export default reducer

@@ -18,14 +18,10 @@ const reducer = (state: any = initialState, action: Action): any => {
         case "getBook":
             console.log("Data", action.payload.data());
 
-            return {
-                ...state,
-                state: action.payload.data()
-            }
-
-        default: 
-            return state;
+            return action.payload.data()
     }
+
+    return state;
 }
 
 export default reducer

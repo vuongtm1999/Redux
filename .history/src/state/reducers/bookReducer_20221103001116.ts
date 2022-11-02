@@ -26,6 +26,8 @@ const reducer = (state: any = initialState, action: Action): any => {
         default: 
             return state;
     }
+
+    return state;
 }
 
 export default reducer
