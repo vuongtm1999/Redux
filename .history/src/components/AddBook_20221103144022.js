@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDoc } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,10 +15,7 @@ const AddBook = ({ id, setBookId }) => {
   const state = useSelector((state) => state.book);
   const dispatch = useDispatch();
 
-  const { addBooks, updateBook, getBook } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { addBooks, updateBook, deleteBook, getAllBooks, getBook} = bindActionCreators(actionCreators, dispatch)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,18 +53,20 @@ const AddBook = ({ id, setBookId }) => {
     setMessage("");
     try {
       //
-      getBook(id);
-      console.log("state", state);
-
-      const bookDoc = doc(db, "books", id);
-
-      const data = await getDoc(bookDoc).data();
-
-      console.log("the record is :", data);
-
-      setTitle(data.title);
-      setAuthor(data.author);
-      setStatus(data.status);
+      const getData = async () => {
+        const bookDoc = doc(db, "books", id);
+    
+        const data = await getDoc(bookDoc);
+    
+        console.log(data.data());
+    
+        return data.data();
+      };
+      console.log("state present", getData());
+      // console.log("the record is :", state.data());
+      // setTitle(state.data().title);
+      // setAuthor(state.data().author);
+      // setStatus(state.data().status);
     } catch (err) {
       console.log("Edit error");
       setMessage({ error: true, msg: err.message });
@@ -80,7 +79,7 @@ const AddBook = ({ id, setBookId }) => {
       editHandler();
     }
   }, [id]);
-
+  
   return (
     <>
       <div className="p-4 box">

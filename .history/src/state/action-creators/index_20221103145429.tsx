@@ -47,18 +47,21 @@ export const updateBook = (id: any, updatedBook: any) => {
 };
 
 export const getBook = (id: any) => {
+  let result:DocumentData 
 
   const getData = async () => {
     const bookDoc = doc(db, "books", id);
     const data = await getDoc(bookDoc);
 
-    return data.data()
+    result = data.data()
   };
+
+  getData();
 
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: "getBook",
-      payload: getData()
+      payload: result
     });
   };
 };

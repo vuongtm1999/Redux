@@ -10,7 +10,6 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  DocumentData,
 } from "firebase/firestore";
 
 interface Action {
@@ -47,18 +46,24 @@ export const updateBook = (id: any, updatedBook: any) => {
 };
 
 export const getBook = (id: any) => {
-
   const getData = async () => {
     const bookDoc = doc(db, "books", id);
+
     const data = await getDoc(bookDoc);
 
-    return data.data()
+    console.log(data.data());
+
+    return data.data();
   };
+
+  let data = getData();
 
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: "getBook",
-      payload: getData()
+      payload: new Promise((resolve,rejects) =>{
+        resolve(data)
+      })
     });
   };
 };

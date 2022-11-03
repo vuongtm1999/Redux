@@ -1,6 +1,6 @@
 import { db } from "../../firebase-config";
-import { Dispatch } from "redux";
-import { createAsyncAction } from "redux-promise-middleware-actions";
+import { Dispatch } from "redux"
+import { createAsyncAction } from 'redux-promise-middleware-actions';
 
 import {
   collection,
@@ -10,17 +10,10 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  DocumentData,
 } from "firebase/firestore";
 
 interface Action {
-  type:
-    | "add"
-    | "remove"
-    | "update"
-    | "getAllBooks"
-    | "getBook"
-    | "getBook_FULFILLED";
+  type: "add" | "remove" | "update" | "getAllBooks" | "getBook";
   payload: any;
 }
 
@@ -47,18 +40,16 @@ export const updateBook = (id: any, updatedBook: any) => {
 };
 
 export const getBook = (id: any) => {
-
-  const getData = async () => {
-    const bookDoc = doc(db, "books", id);
-    const data = await getDoc(bookDoc);
-
-    return data.data()
-  };
-
+  const bookDoc = doc(db, "books", id);
+   
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: "getBook",
-      payload: getData()
+      async payload () {
+        const data = await (await getDoc(bookDoc)).data();
+
+        return data;
+      }
     });
   };
 };

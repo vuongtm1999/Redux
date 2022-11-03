@@ -52,12 +52,13 @@ const AddBook = ({ id, setBookId }) => {
     setAuthor("");
   };
 
+  getBook(id);
+  console.log("state", state);
+
   const editHandler = async () => {
     setMessage("");
     try {
       //
-      getBook(id);
-      console.log("state", state);
 
       const bookDoc = doc(db, "books", id);
 

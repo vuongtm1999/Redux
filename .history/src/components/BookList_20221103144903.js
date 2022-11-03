@@ -10,7 +10,7 @@ const BooksList = ({ getBookId }) => {
   const state = useSelector((state) => state.book);
   const dispatch = useDispatch();
 
-  const { deleteBook } = bindActionCreators(actionCreators, dispatch);
+  const { addBooks, updateBook, deleteBook, getAllBooks, getBook } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     getBooks();

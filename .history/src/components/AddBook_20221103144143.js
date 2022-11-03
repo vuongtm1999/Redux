@@ -15,10 +15,7 @@ const AddBook = ({ id, setBookId }) => {
   const state = useSelector((state) => state.book);
   const dispatch = useDispatch();
 
-  const { addBooks, updateBook, getBook } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { addBooks, updateBook, deleteBook, getAllBooks, getBook} = bindActionCreators(actionCreators, dispatch)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,18 +53,22 @@ const AddBook = ({ id, setBookId }) => {
     setMessage("");
     try {
       //
-      getBook(id);
-      console.log("state", state);
+      const getData = async () => {
+        const bookDoc = doc(db, "books", id);
+    
+        const data = await getDoc(bookDoc);
+    
+        console.log(data.data());
+    
+        return data.data();
+      };
+      const data =  getData()
 
-      const bookDoc = doc(db, "books", id);
-
-      const data = await getDoc(bookDoc).data();
-
-      console.log("the record is :", data);
-
-      setTitle(data.title);
-      setAuthor(data.author);
-      setStatus(data.status);
+      console.log(data);
+      // console.log("the record is :", state.data());
+      // setTitle(state.data().title);
+      // setAuthor(state.data().author);
+      // setStatus(state.data().status);
     } catch (err) {
       console.log("Edit error");
       setMessage({ error: true, msg: err.message });
@@ -80,7 +81,7 @@ const AddBook = ({ id, setBookId }) => {
       editHandler();
     }
   }, [id]);
-
+  
   return (
     <>
       <div className="p-4 box">

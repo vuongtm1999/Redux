@@ -1,6 +1,6 @@
 import { db } from "../../firebase-config";
-import { Dispatch } from "redux";
-import { createAsyncAction } from "redux-promise-middleware-actions";
+import { Dispatch } from "redux"
+import { createAsyncAction } from 'redux-promise-middleware-actions';
 
 import {
   collection,
@@ -10,17 +10,10 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  DocumentData,
 } from "firebase/firestore";
 
 interface Action {
-  type:
-    | "add"
-    | "remove"
-    | "update"
-    | "getAllBooks"
-    | "getBook"
-    | "getBook_FULFILLED";
+  type: "add" | "remove" | "update" | "getAllBooks" | "getBook" | "getBook_FULFILLED";
   payload: any;
 }
 
@@ -46,19 +39,28 @@ export const updateBook = (id: any, updatedBook: any) => {
   };
 };
 
-export const getBook = (id: any) => {
+export const getBooTest = createAsyncAction('GET_DOG', () => (
+  fetch('https://dog.ceo/api/breeds/image/random')
+    .then((response) => response.json())
+));
 
-  const getData = async () => {
-    const bookDoc = doc(db, "books", id);
+export const getBook = (id: any) => {
+  const bookDoc = doc(db, "books", id);
+  
+  const getData = async () => { 
     const data = await getDoc(bookDoc);
 
-    return data.data()
+    console.log(data.data());
+
+    return data.data();
   };
+
+  let data = getData()
 
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: "getBook",
-      payload: getData()
+      payload: data,
     });
   };
 };

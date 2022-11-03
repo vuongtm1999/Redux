@@ -1,7 +1,7 @@
 const initialState: any = {};
 
 interface Action {
-    type: "add" | "remove" | "update" | "getAllBooks" | "getBook" | "getBook_FULFILLED" | "getBookTest" | "undefined";
+    type: "add" | "remove" | "update" | "getAllBooks" | "getBook" | "getBook_FULFILLED" | "getBook_PENDING" | "undefined";
     payload: any;
 }
 
@@ -16,10 +16,11 @@ const reducer = (state: any = initialState, action: Action): any => {
         case "getAllBooks":
             return action.payload;
         case "getBook":
-            console.log("Payload", action.payload);
+            console.log("Data", action.payload.data());
+
             return {
                 ...state,
-                data: action.payload
+                state: action.payload.data()
             }
 
         default: 

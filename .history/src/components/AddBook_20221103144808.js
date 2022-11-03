@@ -15,10 +15,7 @@ const AddBook = ({ id, setBookId }) => {
   const state = useSelector((state) => state.book);
   const dispatch = useDispatch();
 
-  const { addBooks, updateBook, getBook } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { addBooks, updateBook } = bindActionCreators(actionCreators, dispatch);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,12 +53,9 @@ const AddBook = ({ id, setBookId }) => {
     setMessage("");
     try {
       //
-      getBook(id);
-      console.log("state", state);
-
       const bookDoc = doc(db, "books", id);
 
-      const data = await getDoc(bookDoc).data();
+      const data = await (await getDoc(bookDoc)).data();
 
       console.log("the record is :", data);
 

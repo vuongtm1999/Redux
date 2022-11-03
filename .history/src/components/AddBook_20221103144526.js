@@ -15,10 +15,8 @@ const AddBook = ({ id, setBookId }) => {
   const state = useSelector((state) => state.book);
   const dispatch = useDispatch();
 
-  const { addBooks, updateBook, getBook } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { addBooks, updateBook, deleteBook, getAllBooks, getBook } =
+    bindActionCreators(actionCreators, dispatch);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,18 +54,16 @@ const AddBook = ({ id, setBookId }) => {
     setMessage("");
     try {
       //
-      getBook(id);
-      console.log("state", state);
-
       const bookDoc = doc(db, "books", id);
 
-      const data = await getDoc(bookDoc).data();
+      const data = await getDoc(bookDoc);
 
-      console.log("the record is :", data);
+      console.log("the record is :", data.data());
 
-      setTitle(data.title);
-      setAuthor(data.author);
-      setStatus(data.status);
+      // console.log(data);
+      // setTitle(data.title);
+      // setAuthor(data.author);
+      // setStatus(data.status);
     } catch (err) {
       console.log("Edit error");
       setMessage({ error: true, msg: err.message });

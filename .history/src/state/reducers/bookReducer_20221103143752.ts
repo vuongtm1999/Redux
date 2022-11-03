@@ -15,7 +15,7 @@ const reducer = (state: any = initialState, action: Action): any => {
             return action.payload;
         case "getAllBooks":
             return action.payload;
-        case "getBook":
+        case "getBook_FULFILLED":
             console.log("Payload", action.payload);
             return {
                 ...state,

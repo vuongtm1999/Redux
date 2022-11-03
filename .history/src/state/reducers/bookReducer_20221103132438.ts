@@ -1,7 +1,7 @@
 const initialState: any = {};
 
 interface Action {
-    type: "add" | "remove" | "update" | "getAllBooks" | "getBook" | "getBook_FULFILLED" | "getBookTest" | "undefined";
+    type: "add" | "remove" | "update" | "getAllBooks" | "getBook" | "getBook_FULFILLED" | "getBook_PENDING" | "undefined";
     payload: any;
 }
 
@@ -19,7 +19,7 @@ const reducer = (state: any = initialState, action: Action): any => {
             console.log("Payload", action.payload);
             return {
                 ...state,
-                data: action.payload
+                state: action.payload.data()
             }
 
         default: 

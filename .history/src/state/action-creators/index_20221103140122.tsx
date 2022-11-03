@@ -10,7 +10,6 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  DocumentData,
 } from "firebase/firestore";
 
 interface Action {
@@ -46,19 +45,39 @@ export const updateBook = (id: any, updatedBook: any) => {
   };
 };
 
-export const getBook = (id: any) => {
+const getData = async () => {
+  const bookDoc = doc(db, "books", id);
 
+  const data = await getDoc(bookDoc);
+
+  console.log(data.data());
+
+  return data.data();
+};
+
+export const getDog = createAsyncAction("GET_DOG", () =>
+  fetch("https://dog.ceo/api/breeds/image/random").then((response) =>
+    response.json()
+  )
+);
+
+export const getBook = (id: any) => {
   const getData = async () => {
     const bookDoc = doc(db, "books", id);
+
     const data = await getDoc(bookDoc);
 
-    return data.data()
+    console.log(data.data());
+
+    return data.data();
   };
+
+  let data = getData();
 
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: "getBook",
-      payload: getData()
+      payload: data,
     });
   };
 };

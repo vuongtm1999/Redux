@@ -1,6 +1,6 @@
 import { db } from "../../firebase-config";
-import { Dispatch } from "redux";
-import { createAsyncAction } from "redux-promise-middleware-actions";
+import { Dispatch } from "redux"
+import { createAction, createAsyncAction } from 'redux-promise-middleware-actions';
 
 import {
   collection,
@@ -10,17 +10,10 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  DocumentData,
 } from "firebase/firestore";
 
 interface Action {
-  type:
-    | "add"
-    | "remove"
-    | "update"
-    | "getAllBooks"
-    | "getBook"
-    | "getBook_FULFILLED";
+  type: "add" | "remove" | "update" | "getAllBooks" | "getBook";
   payload: any;
 }
 
@@ -46,19 +39,31 @@ export const updateBook = (id: any, updatedBook: any) => {
   };
 };
 
+// Create an async action
+const fooAction = createAction('GET_BOOK_TEST', async () => {
+  const bookDoc = doc(db, "books", id);
+
+  const data = await getDoc(bookDoc);
+
+  return data;
+});
+
+// Use async action
+fooAction('123')
+
 export const getBook = (id: any) => {
+  
+  const getData = async () => { 
 
-  const getData = async () => {
-    const bookDoc = doc(db, "books", id);
-    const data = await getDoc(bookDoc);
-
-    return data.data()
+    return data.data();
   };
+
+  let data = getData()
 
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: "getBook",
-      payload: getData()
+      payload: data.then((data) => console.log(data)),
     });
   };
 };
