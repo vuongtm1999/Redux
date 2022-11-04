@@ -1,0 +1,38 @@
+import {
+    getDoc,
+    doc,
+  } from "firebase/firestore";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { db } from '../../firebase-config';
+
+const initialState = { title: "", author: "", status: "", loading: "", error: "", action: "", data: ""}
+
+export const getBook = createAsyncThunk('test/getBook', async (id: string) => {
+    const bookDoc = doc(db, "books", id);
+
+    const response = await getDoc(bookDoc)
+    return response.data()
+})
+
+const testSlice = createSlice({
+    name: 'test',
+    initialState,
+    reducers: {},
+    extraReducers: {
+        [getBook.pending.toString()]: (state: any) => {
+            state.loading = true;
+            console.log("pedding");
+        },
+        [getBook.rejected.toString()]: (state, action) => {
+            console.log("Error", action.error);
+            state = { ...state, error: action.error };
+        },
+        [getBook.fulfilled.toString()]: (state, action) => {
+            state = { ...state, data: action.payload };
+        }
+    }
+})
+
+const { reducer: testReducer } = testSlice
+
+export default testReducer

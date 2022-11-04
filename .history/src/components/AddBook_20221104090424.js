@@ -1,10 +1,12 @@
 import { unwrapResult } from "@reduxjs/toolkit";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
+import { db } from "../firebase-config";
 import { actionCreators } from "../state";
-import { getBook } from "../state/reducers/getBookReducer";
+import { getBook } from "../state/reducers/testReducer";
 
 const AddBook = ({ id, setBookId }) => {
   const [title, setTitle] = useState("");
@@ -56,7 +58,6 @@ const AddBook = ({ id, setBookId }) => {
     setMessage("");
     try {
       //
-      //must have await
       const actionResult = await dispatch(getBook(id))
       const book = unwrapResult(actionResult)
       console.log("state", book);

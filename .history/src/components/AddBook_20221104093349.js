@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../state";
-import { getBook } from "../state/reducers/getBookReducer";
+import { getBook } from "../state/reducers/testReducer";
 
 const AddBook = ({ id, setBookId }) => {
   const [title, setTitle] = useState("");

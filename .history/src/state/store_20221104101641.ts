@@ -16,8 +16,6 @@ export const store = configureStore({
       serializableCheck: {
         // Ignore these action types
         ignoredActions: ['add', 'delete', "update"],
-         // Ignore these paths in the state
-        ignoredPaths: ['book'],
       },
     }),
 })

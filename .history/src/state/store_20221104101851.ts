@@ -15,8 +15,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types
-        ignoredActions: ['add', 'delete', "update"],
-         // Ignore these paths in the state
+        // ignoredActions: ['add', 'delete', "update"],
         ignoredPaths: ['book'],
       },
     }),

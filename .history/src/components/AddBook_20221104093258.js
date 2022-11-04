@@ -1,10 +1,11 @@
 import { unwrapResult } from "@reduxjs/toolkit";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../state";
-import { getBook } from "../state/reducers/getBookReducer";
+import { getBook } from "../state/reducers/testReducer";
 
 const AddBook = ({ id, setBookId }) => {
   const [title, setTitle] = useState("");
@@ -70,10 +71,10 @@ const AddBook = ({ id, setBookId }) => {
     }
   };
 
-  useEffect(() => {
+  useEffect(async() => {
     console.log("The id here is : ", id);
     if (id !== undefined && id !== "") {
-      editHandler();
+      await editHandler();
     }
   }, [id]);
 

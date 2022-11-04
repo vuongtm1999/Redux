@@ -17,7 +17,7 @@ export const store = configureStore({
         // Ignore these action types
         ignoredActions: ['add', 'delete', "update"],
          // Ignore these paths in the state
-        ignoredPaths: ['book'],
+        ignoredPaths: ['book', 'payload'],
       },
     }),
 })

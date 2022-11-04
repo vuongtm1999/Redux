@@ -11,7 +11,7 @@ const AddBook = ({ id, setBookId }) => {
   const [author, setAuthor] = useState("");
   const [status, setStatus] = useState("Available");
   const [flag, setFlag] = useState(true);
-  const [message, setMessage] = useState({ error: false, msg: "" });
+  const [message, setMessage] = useState<string , object>({ error: false, msg: "" } as object);
   const state = useSelector((state) => state.book);
   const dispatch = useDispatch();
 
