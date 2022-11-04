@@ -75,8 +75,7 @@ const AddBook = ({ id, setBookId }) => {
     if (id !== undefined && id !== "") {
       editHandler();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, editHandler()]);
 
   return (
     <>

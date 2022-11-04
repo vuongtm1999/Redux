@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
@@ -75,7 +76,6 @@ const AddBook = ({ id, setBookId }) => {
     if (id !== undefined && id !== "") {
       editHandler();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (
